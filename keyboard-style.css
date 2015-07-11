@@ -1,0 +1,29 @@
+/*body{
+	background-color:#DC3522;
+}
+*/
+
+#keyboard{
+	width:auto;
+	margin-left:auto;
+	margin-right:auto;
+	padding:1em;
+	background-color:#2A2C2B;
+	font-family:Courier New;
+	border-radius: 10px;
+}
+
+.keyboard-row{
+	margin:0.6em auto 0.6em auto;
+	width: -webkit-max-content;
+}
+
+#keyboard span{
+	background-color:#D9CB9E;
+	border-radius: 0.4em;
+	display:inline-block;
+	width:4em;
+	height:4em;
+	text-indent: 0.2em;
+	-webkit-transition: height 0.2s;
+}

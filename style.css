@@ -1,0 +1,9 @@
+body{
+	background-color:#DC3522;
+}
+
+#board{
+	width:800px;
+	margin-left:auto;
+	margin-right:auto;
+}
