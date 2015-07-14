@@ -10,17 +10,8 @@ var customKeyUp = new Event('customkeyup', {
 });
 
 var keyboard = (function (){
-	var _keyState = [];
 
 	var initialize = function(){
-
-		// should this be an object?
-		// how to debounce?
-
-		//fill the _keystate array
-		for(i=0;i<26;i++){
-			_keyState[i]=0;
-		}
 
 		//Draw the Keyboard
 		var keyboardDiv = document.createElement("div");
@@ -32,14 +23,15 @@ var keyboard = (function (){
 		document.body.appendChild(keyboardDiv);
 
 		_setKeyboardHandler();
-		_setMouseHandler();
+		_setMouseHandler(keyboardDiv);
 	};
 
-	var _setMouseHandler = function(){
-		//seting mousey stuff here
-		for(i=49;i<91;i++){
-			var elem = document.getElementById(''+i+'');
-			if (elem) {
+	var _setMouseHandler = function(aDiv){
+		var rows = aDiv.children;
+
+		for (var i = 0; i < rows.length; i++) {
+			for (var j = 0; j < rows[i].children.length; j++) {
+				var elem = rows[i].children[j];
 				elem.addEventListener('mousedown',_mouseClicked);
 				elem.addEventListener('mouseup',_mouseReleased);
 			}
@@ -52,49 +44,47 @@ var keyboard = (function (){
 	};
 
 	var _keyPressed = function(event){
-		// console.log("key pressed was " + event.keyCode);
-		_keyState[event.keyCode-65]=1;
+		console.log(event.keyCode);
 		var el = document.getElementById(''+event.keyCode+'');
 		if (!el) return;
 
+		if (el.getAttribute('data-pressed') === '1') {
+			return;
+		}
+
+		el.setAttribute('data-pressed', '1');
 		el.style.transition="background linear 0.1s";
 		el.style.background="#fe1";
-		// console.log(_keyState);
-
 		el.dispatchEvent(customKeyDown);
 	};
 
 	var _keyReleased = function(event){
-		//console.log("key released was " + event.keyCode);
-		_keyState[event.keyCode-65]=0;
 		var el = document.getElementById(''+event.keyCode+'');
 		if (!el) return;
 
+		el.setAttribute('data-pressed', '0');
 		el.style.transition="background linear 0.1s";
 		el.style.background="#D9CB9E";
-		// console.log(_keyState);
-
 		el.dispatchEvent(customKeyUp);
 	};
 
 	var _mouseClicked = function(event){
-		//console.log(event.srcElement.id);
-		_keyState[event.srcElement.id-65]=1;
-
 		var el = document.getElementById(''+event.srcElement.id+'');
+
+		if (el.getAttribute('data-pressed') === '1') {
+			return;
+		}
+
+		el.setAttribute('data-pressed', '1');
 		el.style.transition="background linear 0.1s";
 		el.style.background="#fe1";
-		// console.log(_keyState);
-
 		el.dispatchEvent(customKeyDown);
 	};
 
 	var _mouseReleased = function(event){
-		//console.log(event.srcElement.id);
-		_keyState[event.srcElement.id-65]=0;
-
 		var el = document.getElementById(''+event.srcElement.id+'');
 
+		el.setAttribute('data-pressed', '0');
 		el.style.transition="background linear 0.1s";
 		el.style.background="#D9CB9E";
 		// console.log(_keyState);
