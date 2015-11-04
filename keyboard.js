@@ -2,7 +2,7 @@ var keyboard = (function (){
 
 	var initialize = function(){
 
-		//Draw the Keyboard
+		
 		var keyboardDiv = document.createElement("div");
 		keyboardDiv.id = "keyboard";
 		keyboardDiv.innerHTML="<div class='keyboard-row'><span id='49'>1</span> <span id='50'>2</span> <span id='51'>3</span> <span id='52'>4</span> <span id='53'>5</span> <span id='54'>6</span> <span id='55'>7</span></div> \
@@ -94,7 +94,7 @@ var keyboard = (function (){
 		el.style.transition="background linear 0.1s";
 		el.style.background="#D9CB9E";
 
-		// dispatch custom event
+		
 		var customKeyUp = new Event('customkeyup', {
 				'view': window,
 		    'bubbles': true
