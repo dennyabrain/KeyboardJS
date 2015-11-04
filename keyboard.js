@@ -27,7 +27,7 @@ var keyboard = (function (){
 				elem.addEventListener('mousedown',_mouseClicked);
 				elem.addEventListener('mouseup',_mouseReleased);
 
-				// add index
+				
 				elem.setAttribute('data-row', String(j) );
 			}
 		}
